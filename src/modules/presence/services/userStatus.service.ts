@@ -6,6 +6,8 @@ import { UserStatusRepository } from '../repositories/userStatus.repository';
 
 @Injectable()
 export class UserStatusService {
+  private static readonly USER_STATUS_CACHE_PREFIX = 'users';
+
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private userStatusRepository: UserStatusRepository,
@@ -47,6 +49,6 @@ export class UserStatusService {
   }
 
   private getUserStatusCacheKey(userId: string) {
-    return `users:${userId}:status`;
+    return `${UserStatusService.USER_STATUS_CACHE_PREFIX}:${userId}:status`;
   }
 }
